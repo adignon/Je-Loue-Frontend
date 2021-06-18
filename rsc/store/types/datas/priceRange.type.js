@@ -1,0 +1,2 @@
+export const SET_PRICE_RANGE="PRICE_RANGE::SET";
+export const LOAD_PRICE_RANGE="PRICE_RANGE::LOAD"

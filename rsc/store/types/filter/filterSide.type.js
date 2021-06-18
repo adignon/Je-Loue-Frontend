@@ -1,0 +1,1 @@
+export const SET_FILTER_SIDE="FILTER_SIDE::SET";

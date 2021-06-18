@@ -1,0 +1,1 @@
+export const SET_FILTERED_DATA='FILTERED_DATA::SET';

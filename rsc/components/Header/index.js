@@ -13,7 +13,8 @@ import {
     ListItemText,
     ListItemIcon,
     SwipeableDrawer,
-    Collapse, useTheme
+    Collapse, useTheme,
+    Container
 } from "@material-ui/core"
 import {MdMenu, MdSearch} from 'react-icons/md'
 import {FiChevronDown, FiHeart, FiHome, FiLogOut, FiUser} from "react-icons/fi";
@@ -31,129 +32,131 @@ export const Header=({showMenu=true})=>{
     const router=useRouter()
     return(
         <AppBar elevation={0} className={classes.appBar}>
-            <Toolbar className={classes.toolbar}>
-                <Link href={"/"}>
-                    <a className={classes.logoLink}>
-                        <LogoText/>
-                    </a>
-                </Link>
+            <Container>
+                <Toolbar className={classes.toolbar}>
+                    <Link href={"/"}>
+                        <a className={classes.logoLink}>
+                            <LogoText/>
+                        </a>
+                    </Link>
 
-                <Grid container justify={(isMb ? "center":(showMenu ? "flex-end" : "flex-start"))}>
-                    <Grid item md={isMb ? 10 : false} lg={3}>
-                        <div className={style['d-flex']}>
-                            <TextField
-                                placeholder={"Rechercher une ville..."}
-                                className={
-                                    cc(style, ['mr-0', "ml-5", "mt-2"])
-                                    +cc(null, [classes.textField], true)
-                                }
-                                inputProps={{
-                                    className:classes.textFieldInput
-                                }}
-                            />
-                            <IconButton className={classes.iconButton} >
-                                <MdSearch/>
-                            </IconButton>
-                        </div>
+                    <Grid container justify={(isMb ? "center":(showMenu ? "flex-end" : "flex-start"))}>
+                        <Grid item md={isMb ? 10 : false} lg={3}>
+                            <div className={style['d-flex']}>
+                                <TextField
+                                    placeholder={"Rechercher une ville..."}
+                                    className={
+                                        cc(style, ['mr-0', "ml-5", "mt-2"])
+                                        +cc(null, [classes.textField], true)
+                                    }
+                                    inputProps={{
+                                        className:classes.textFieldInput
+                                    }}
+                                />
+                                <IconButton className={classes.iconButton} >
+                                    <MdSearch/>
+                                </IconButton>
+                            </div>
+                        </Grid>
+                        {
+                            !isMb && showMenu
+                            &&
+                            <Grid item container spacing={3} md={9} justify={"flex-end"} style={{alignContent:"center"}}>
+
+                                <Grid item className={cc(style, ["d-flex"])}>
+                                    <Button className={
+                                        cc(style,['text-capitalize'])
+                                        +cc(null, [classes.btnlink], true)
+                                        +(router.pathname==="/catalogue" ? " active":"")
+                                    }>
+                                        <Link href={"/catalogue"}>
+                                            <a>Catalogue</a>
+                                        </Link>
+                                    </Button>
+                                </Grid>
+                                <Grid item className={cc(style, ["d-flex"])}>
+                                    <Button className={
+                                        cc(style,['text-capitalize'])
+                                        +cc(null, [classes.btnlink], true)
+                                        +(router.pathname==="/comment-ca-marche" ? " active":"")
+                                    }>
+                                        <Link href={"/comment-ca-marche"}>
+                                            <a>Comment ça marche</a>
+                                        </Link>
+                                    </Button>
+                                </Grid>
+                                <Grid item className={cc(style, ["d-flex"])}>
+                                    <IconButton 
+                                        color={"secondary"}
+                                        className={""}
+                                        style={{padding:"0.4rem"}}
+                                    >
+                                        <FiUser width={25}/>
+                                    </IconButton>
+                                </Grid>
+                                {/*
+                                <Grid item className={cc(style, ["d-flex"])}>
+                                    <div className={style.nestedMenuContainer}>
+                                        <Button
+                                            className={
+                                                cc(style,['text-capitalize'])
+                                                +cc(null, [classes.btnlink], true)
+                                            }
+                                            startIcon={<FiUser width={25}/> }
+                                            variant={"outlined"}
+                                            color={"primary"}
+                                            endIcon={<FiChevronDown width={25}/>}
+                                        >
+                                            Mon Compte
+                                        </Button>
+                                        <Paper className={cc(style, ['nestedMenu', "arrow", "arrow-top-right", "right-0","top-120", "shadowed-1"])}>
+                                            <List className={cc(style, ['p-0'])}>
+                                                <ListItem
+                                                    button
+                                                    className={cc(style, ['px-6', "py-1", "pr-7"])+cc(null, [classes.btnlink], true)}
+                                                >
+                                                    <ListItemIcon style={{minWidth:30}}><FiHome width={25}/> </ListItemIcon>
+                                                    <ListItemText primaryTypographyProps={{
+                                                        classes:{
+                                                            root:classes.nestedLink
+                                                        }
+                                                    }}>
+                                                        Dashboard
+                                                    </ListItemText>
+                                                </ListItem>
+                                                <ListItem button className={cc(style, ['px-6', "py-1", "pr-7"])+cc(null, [classes.btnlink], true)}>
+                                                    <ListItemIcon style={{minWidth:30}}><FiHeart width={25}/> </ListItemIcon>
+                                                    <ListItemText primaryTypographyProps={{
+                                                        classes:{
+                                                            root:classes.nestedLink
+                                                        }
+                                                    }}>Mes Favoris</ListItemText>
+                                                </ListItem>
+                                                <ListItem button className={cc(style, ['px-6', "py-1", "pr-7"])+cc(null, [classes.btnlink], true)}>
+                                                    <ListItemIcon style={{minWidth:30}}><FiLogOut width={25}/> </ListItemIcon>
+                                                    <ListItemText primaryTypographyProps={{
+                                                        classes:{
+                                                            root:classes.nestedLink
+                                                        }
+                                                    }}>Deconnexion</ListItemText>
+                                                </ListItem>
+                                            </List>
+                                        </Paper>
+                                    </div>
+                                </Grid>
+                                */}
+                            </Grid>
+                        }
                     </Grid>
                     {
-                        !isMb && showMenu
+                        isMb && showMenu
                         &&
-                        <Grid item container spacing={3} md={9} justify={"flex-end"} style={{alignContent:"center"}}>
-
-                            <Grid item className={cc(style, ["d-flex"])}>
-                                <Button className={
-                                    cc(style,['text-capitalize'])
-                                    +cc(null, [classes.btnlink], true)
-                                    +(router.pathname==="/catalogue" ? " active":"")
-                                }>
-                                    <Link href={"/catalogue"}>
-                                        <a>Catalogue</a>
-                                    </Link>
-                                </Button>
-                            </Grid>
-                            <Grid item className={cc(style, ["d-flex"])}>
-                                <Button className={
-                                    cc(style,['text-capitalize'])
-                                    +cc(null, [classes.btnlink], true)
-                                    +(router.pathname==="/comment-ca-marche" ? " active":"")
-                                }>
-                                    <Link href={"/comment-ca-marche"}>
-                                        <a>Comment ça marche</a>
-                                    </Link>
-                                </Button>
-                            </Grid>
-                            <Grid item className={cc(style, ["d-flex"])}>
-                                <IconButton 
-                                    color={"secondary"}
-                                    className={""}
-                                    style={{border:"2px solid", padding:"0.4rem"}}
-                                >
-                                    <FiUser width={25}/>
-                                </IconButton>
-                            </Grid>
-                            {/*
-                            <Grid item className={cc(style, ["d-flex"])}>
-                                <div className={style.nestedMenuContainer}>
-                                    <Button
-                                        className={
-                                            cc(style,['text-capitalize'])
-                                            +cc(null, [classes.btnlink], true)
-                                        }
-                                        startIcon={<FiUser width={25}/> }
-                                        variant={"outlined"}
-                                        color={"primary"}
-                                        endIcon={<FiChevronDown width={25}/>}
-                                    >
-                                        Mon Compte
-                                    </Button>
-                                    <Paper className={cc(style, ['nestedMenu', "arrow", "arrow-top-right", "right-0","top-120", "shadowed-1"])}>
-                                        <List className={cc(style, ['p-0'])}>
-                                            <ListItem
-                                                button
-                                                className={cc(style, ['px-6', "py-1", "pr-7"])+cc(null, [classes.btnlink], true)}
-                                            >
-                                                <ListItemIcon style={{minWidth:30}}><FiHome width={25}/> </ListItemIcon>
-                                                <ListItemText primaryTypographyProps={{
-                                                    classes:{
-                                                        root:classes.nestedLink
-                                                    }
-                                                }}>
-                                                    Dashboard
-                                                </ListItemText>
-                                            </ListItem>
-                                            <ListItem button className={cc(style, ['px-6', "py-1", "pr-7"])+cc(null, [classes.btnlink], true)}>
-                                                <ListItemIcon style={{minWidth:30}}><FiHeart width={25}/> </ListItemIcon>
-                                                <ListItemText primaryTypographyProps={{
-                                                    classes:{
-                                                        root:classes.nestedLink
-                                                    }
-                                                }}>Mes Favoris</ListItemText>
-                                            </ListItem>
-                                            <ListItem button className={cc(style, ['px-6', "py-1", "pr-7"])+cc(null, [classes.btnlink], true)}>
-                                                <ListItemIcon style={{minWidth:30}}><FiLogOut width={25}/> </ListItemIcon>
-                                                <ListItemText primaryTypographyProps={{
-                                                    classes:{
-                                                        root:classes.nestedLink
-                                                    }
-                                                }}>Deconnexion</ListItemText>
-                                            </ListItem>
-                                        </List>
-                                    </Paper>
-                                </div>
-                            </Grid>
-                            */}
-                        </Grid>
+                        <>
+                            <SmMenu/>
+                        </>
                     }
-                </Grid>
-                {
-                    isMb && showMenu
-                    &&
-                    <>
-                        <SmMenu/>
-                    </>
-                }
-            </Toolbar>
+                </Toolbar>
+            </Container>
         </AppBar>
     )
 }

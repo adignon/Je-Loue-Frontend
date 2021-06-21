@@ -96,67 +96,71 @@ export default function Catalogue(props) {
     return (
         <BaseLayout pageTitle={"Catalogue"}>
             <MainContainer style={{backgroundColor: "var(--primary-color)"}}>
-                <div className={classes.pageTitleContainer}>
-                    <Grid container justify={"space-between"}>
-                        <Grid item xs={12} md={"auto"}>
-                            <Typography variant={"h5"} className={" text-white " + classes.pageTitle}>Catalogue d'Appartements & Chambres À Louer</Typography>
+                <Container >
+                    <div className={classes.pageTitleContainer}>
+                        <Grid container justify={"space-between"}>
+                            <Grid item xs={12} md={"auto"}>
+                                <Typography variant={"h5"} className={" text-white " + classes.pageTitle}>Catalogue d'Appartements & Chambres À Louer</Typography>
+                            </Grid>
+                            <Grid item xs={12} md={"auto"} className={(isMb ? "d-flex justify-right" : "")}>
+                                <div className={"d-flex pl-3  r-1 " + classes.nativeFilterSelect}
+                                     style={{alignItems: "center", backgroundColor: "#eee"}}>
+                                    <Typography className={"bolded-900 mr-2"}><MdSort width={25}/>{!isMb && 'Filtrer:'}
+                                    </Typography>
+                                    {dataBaseSortingForm()}
+                                </div>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} md={"auto"} className={(isMb ? "d-flex justify-right" : "")}>
-                            <div className={"d-flex pl-3  r-1 " + classes.nativeFilterSelect}
-                                 style={{alignItems: "center", backgroundColor: "#eee"}}>
-                                <Typography className={"bolded-900 mr-2"}><MdSort width={25}/>{!isMb && 'Filtrer:'}
-                                </Typography>
-                                {dataBaseSortingForm()}
-                            </div>
-                        </Grid>
-                    </Grid>
-                </div>
-            </MainContainer>
-            <MainContainer>
-                {
-                    !isMb &&
-                    <div className={"d-flex"}>
-                        <section className={classes.leftSection}>
-                            <FilterCard
-                                stickyHeight={rightContainerHeight}
-                            />
-                        </section>
-                        <div className={classes.rightSection + " m-2"} ref={rightContainerRef}>
-                            <Container className={"pr-0 py-5"}>
-                            {
-                                properties!==null && properties.length ?
-                                <Paginate items={properties} itemPerPage={12}>
-                                    {
-                                        (paginatedItems,currentPageNumber,perPageContentSize, pagesCount,  paginationHandles/*:{prev,next, jumpToPage}*/)=>{
-                                           const handleChange=(e, v)=>{
-                                                paginationHandles.jumpToPage(Number(v));
-                                           }
-                                            return <>
-                                                        {propertiesSection(paginatedItems)}
-                                                        <Pagination count={pagesCount} page={currentPageNumber} onChange={handleChange} color={"secondary"} className={"mt-8 justify-center"}/>
-                                                    </>
-                                        }
-                                    }
-                                </Paginate>
-                                :
-                                propertiesSection(properties)
-                            }
-                            </Container>
-                        </div>
                     </div>
-                }
-                {
-                    isMb &&
-                    <>
-                        <div className={"my-5"}>
-                            {propertiesSection(properties)}
+                </Container>
+            </MainContainer>
+            <MainContainer >
+                <Container >
+                    {
+                        !isMb &&
+                        <div className={"d-flex"}>
+                            <section className={classes.leftSection}>
+                                <FilterCard
+                                    stickyHeight={rightContainerHeight}
+                                />
+                            </section>
+                            <div className={classes.rightSection + " m-2"} ref={rightContainerRef}>
+                                <Container className={"pr-0 py-5"}>
+                                {
+                                    properties!==null && properties.length ?
+                                    <Paginate items={properties} itemPerPage={12}>
+                                        {
+                                            (paginatedItems,currentPageNumber,perPageContentSize, pagesCount,  paginationHandles/*:{prev,next, jumpToPage}*/)=>{
+                                               const handleChange=(e, v)=>{
+                                                    paginationHandles.jumpToPage(Number(v));
+                                               }
+                                                return <>
+                                                            {propertiesSection(paginatedItems)}
+                                                            <Pagination count={pagesCount} page={currentPageNumber} onChange={handleChange} color={"secondary"} className={"mt-8 justify-center"}/>
+                                                        </>
+                                            }
+                                        }
+                                    </Paginate>
+                                    :
+                                    propertiesSection(properties)
+                                }
+                                </Container>
+                            </div>
                         </div>
-                        <FilterCard
-                            type={"sm"}
-                            sortingData={dataSorting}
-                        />
-                    </>
-                }
+                    }
+                    {
+                        isMb &&
+                        <>
+                            <div className={"my-5"}>
+                                {propertiesSection(properties)}
+                            </div>
+                            <FilterCard
+                                type={"sm"}
+                                sortingData={dataSorting}
+                            />
+                        </>
+                    }
+                </Container>
             </MainContainer>
         </BaseLayout>
     )

@@ -2,7 +2,8 @@ import {makeStyles} from "@material-ui/core";
 
 export const useHeaderStyles=makeStyles(theme=>({
     appBar:{
-        borderBottom:"1px solid #ccc"
+        borderBottom:"1px solid #ccc",
+        background:"#fff"
     },
     toolbar:{
         height:65,

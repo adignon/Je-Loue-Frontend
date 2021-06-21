@@ -129,7 +129,7 @@ export const SignUpForm=({profile=""})=>{
 				<Typography variant={isMb ? "h6" : "h5"}>
 					Créer un compte
 				</Typography>
-				<Grid container spacing={2} >
+				<Grid container spacing={2} className={"mt-4"}>
 					<Grid item xs={isMb ? 12: 6} >
 						<TextField
 							variant="outlined" 
@@ -141,6 +141,7 @@ export const SignUpForm=({profile=""})=>{
 							onChange={e=>{handleValidation(e); handleForm(e)}} 
 							className={classes.input} 
 							helperText={errors.firstname}
+							placeholder={"Entrez vos prénoms"}
 							error={Boolean(errors.firstname && errors.firstname.length)}
 						/>
 					</Grid>

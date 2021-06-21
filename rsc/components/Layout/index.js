@@ -20,12 +20,13 @@ export const BaseLayout=({pageTitle, children, className, headerProps={}})=>{
 export const MainContainer=({children, padding=20, className, ...props})=>{
     const propsStyles={
         style:{
-            maxWidth:1370,
-            ...props.style
+            maxWidth:"100%",
+            ...props.style,
+            padding:0,
         }
     }
     return(
-        <Container {...props} className={className ? className : ""} {...propsStyles}>
+        <Container {...props} className={" "+(className ? className : "")} {...propsStyles}>
             {children}
         </Container>
     )

@@ -42,7 +42,7 @@ export const PropertyWidget=({property, className, props})=>{
                             <SwiperSlide key={i}>
                                 <div style={{minWidth:300, width: imageWidth}} className={"r-2"}>
                                     <Image
-                                        src={`${API_BASE_UPLOADS_BASE}/${media.title}`}
+                                        src={`${API_BASE_UPLOADS_BASE}/${media.filename}`}
                                         width={imageWidth}
                                         height={200}
                                         className={classes.cardImg+" r-1"}

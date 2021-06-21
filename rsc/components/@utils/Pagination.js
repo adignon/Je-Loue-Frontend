@@ -42,7 +42,6 @@ export const Pagination=({items=[], itemPerPage, children})=>{
         next,
         jumpToPage
     }
-    console.log(paginatedItems,currentPageNumber,perPageContentSize, pagesCount)
     return(
         <>
             {children(paginatedItems,currentPageNumber,perPageContentSize, pagesCount+1, paginationHandles)}

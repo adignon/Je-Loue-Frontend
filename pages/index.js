@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import {BaseLayout} from "../rsc/components";
+import {BaseLayout, Banner} from "../rsc/components";
 import {Rooms} from "../rsc/store/@fakedb"
+import useResize from "../rsc/hooks/useResize";
 
 export default function Home(props) {
+    const size=useResize()
     return (
         <BaseLayout pageTitle={"Acceuil"}>
-            room
+            <Banner/>
         </BaseLayout>
     )
 }
